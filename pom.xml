@@ -27,7 +27,7 @@
             <artifactId>files_encoder</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/jar/encoder_decoder_library.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/jar/signed_encoder_decoder_library.jar</systemPath>
         </dependency>
 
 
