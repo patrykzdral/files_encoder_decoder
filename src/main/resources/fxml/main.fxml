@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="520.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pwr.encoder.fxfiles.controller.MainController">
+<VBox prefHeight="493.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pwr.encoder.fxfiles.controller.MainController">
    <children>
       <HBox prefHeight="60.0" prefWidth="600.0">
          <children>
@@ -66,7 +66,7 @@
                         <Label text="Oryginalna zawartość pliku" />
                      </children>
                   </HBox>
-                  <TextArea fx:id="textAreaOriginalFile" editable="false" prefHeight="248.0" prefWidth="305.0" />
+                  <TextArea fx:id="textAreaOriginalFile" editable="false" prefHeight="248.0" prefWidth="305.0" wrapText="true" />
                </children>
             </VBox>
             <Region prefHeight="268.0" prefWidth="42.0" />
@@ -77,7 +77,7 @@
                         <Label text="Zawartość po przetworzeniu" />
                      </children>
                   </HBox>
-                  <TextArea fx:id="textAreaAfterChanges" editable="false" prefHeight="248.0" prefWidth="305.0" />
+                  <TextArea fx:id="textAreaAfterChanges" editable="false" prefHeight="248.0" prefWidth="305.0" wrapText="true" />
                </children>
             </VBox>
             <Region prefHeight="268.0" prefWidth="30.0" />
@@ -98,6 +98,6 @@
             </VBox>
          </children>
       </HBox>
-      <Region prefHeight="13.0" prefWidth="600.0" />
+      <Region prefHeight="0.0" prefWidth="679.0" />
    </children>
 </VBox>

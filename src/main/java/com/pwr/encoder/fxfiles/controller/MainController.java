@@ -1,7 +1,6 @@
 package com.pwr.encoder.fxfiles.controller;
 
 import com.pwr.encoder.fxfiles.custom.CustomMessageBox;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -11,11 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import library.EncoderDecoder;
-
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
-import java.beans.Encoder;
 import java.io.*;
 import java.net.URL;
 import java.security.InvalidKeyException;
