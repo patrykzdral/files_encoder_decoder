@@ -13,12 +13,15 @@ import javafx.stage.FileChooser;
 import library.EncoderDecoder;
 
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import java.beans.Encoder;
 import java.io.*;
 import java.net.URL;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -79,7 +82,17 @@ public class MainController implements Initializable {
 
     public void buttonEncrypt_onAction(ActionEvent actionEvent) {
         try {
-            encoderDecoder.encryptFile(filePath,outPutFilePath);
+            try {
+                encoderDecoder.encryptFile(filePath,outPutFilePath);
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (BadPaddingException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            }
             String fileContent = readTextFromFile(outPutFilePath);
             if (fileContent!=null){
                 textAreaAfterChanges.setText(fileContent);
@@ -95,7 +108,19 @@ public class MainController implements Initializable {
 
     public void buttonDecrypt_onAction(ActionEvent actionEvent) {
         try {
-            encoderDecoder.decryptFile(outPutFilePath,outPutFilePath);
+            try {
+                encoderDecoder.decryptFile(outPutFilePath,outPutFilePath);
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (BadPaddingException e) {
+                e.printStackTrace();
+            } catch (InvalidKeyException e) {
+                e.printStackTrace();
+            } catch (IllegalBlockSizeException e) {
+                e.printStackTrace();
+            }
             String fileContent = readTextFromFile(outPutFilePath);
             if (fileContent!=null){
                 textAreaAfterChanges.setText(fileContent);
@@ -104,11 +129,6 @@ public class MainController implements Initializable {
             customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie",
                     "Operacja deszyfrowania nie powiodła się.",
                     "Powód: " + "plik do deszyfrowania nie istnieje.").showAndWait();        }
-        catch ( Exception e){
-            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie",
-                    "Operacja deszyfrowania nie powiodła się.",
-                    "Powód: " + "plik jest niezaszyfrowany.").showAndWait();
-        }
     }
 
     private String readTextFromFile(String path){
