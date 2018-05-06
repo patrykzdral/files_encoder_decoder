@@ -47,8 +47,6 @@ public class MainController implements Initializable {
     private CustomMessageBox customMessageBox;
 
     public void initialize(URL location, ResourceBundle resources) {
-        //Cryptography cryptography = new Cryptography();
-        //EncoDecoder encoDecoder = new EncoDecoder();
         customMessageBox = new CustomMessageBox();
         try {
             encoderDecoder = new EncoderDecoder();
@@ -67,13 +65,13 @@ public class MainController implements Initializable {
     public void buttonChooseFile_onAction(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File("/"));
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txtFiles","*.txt"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txtFiles", "*.txt"));
         File selectedFile = fc.showOpenDialog(null);
-        if(selectedFile !=null){
+        if (selectedFile != null) {
             filePath = selectedFile.toString();
             textFieldFilePath.setText(filePath);
             String fileContent = readTextFromFile(filePath);
-            if (fileContent!=null){
+            if (fileContent != null) {
                 textAreaOriginalFile.setText(fileContent);
                 textAreaAfterChanges.clear();
             }
@@ -82,57 +80,48 @@ public class MainController implements Initializable {
 
     public void buttonEncrypt_onAction(ActionEvent actionEvent) {
         try {
-            try {
-                encoderDecoder.encryptFile(filePath,outPutFilePath);
-            } catch (InvalidKeySpecException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (BadPaddingException e) {
-                e.printStackTrace();
-            } catch (InvalidKeyException e) {
-                e.printStackTrace();
-            }
+            encoderDecoder.encryptFile(filePath, outPutFilePath);
+
             String fileContent = readTextFromFile(outPutFilePath);
-            if (fileContent!=null){
+            if (fileContent != null) {
                 textAreaAfterChanges.setText(fileContent);
             }
         } catch (IOException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja szyfrowania nie powiodła się.", "Powód: " + "błąd odczytu z pliku").showAndWait();
+        } catch (IllegalBlockSizeException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja szyfrowania nie powiodła się.", "Powód: " + "zbyt duży rozmiar pliku.").showAndWait();
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }catch(javax.crypto.IllegalBlockSizeException e){
-            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie",
-                    "Operacja wymiany informacji nie powiodła się.",
-                    "Powód: " + "zbyt duży rozmiar pliku.").showAndWait();
+        } catch (BadPaddingException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja szyfrowania nie powiodła się.", "Powód: " + "Bład szyfrowania").showAndWait();
+        } catch (InvalidKeyException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja szyfrowania nie powiodła się.", "Powód: " + "Zbyt duży rozmiar pliku").showAndWait();
         }
     }
 
     public void buttonDecrypt_onAction(ActionEvent actionEvent) {
         try {
-            try {
-                encoderDecoder.decryptFile(outPutFilePath,outPutFilePath);
-            } catch (InvalidKeySpecException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (BadPaddingException e) {
-                e.printStackTrace();
-            } catch (InvalidKeyException e) {
-                e.printStackTrace();
-            } catch (IllegalBlockSizeException e) {
-                e.printStackTrace();
-            }
+            encoderDecoder.decryptFile(outPutFilePath, outPutFilePath);
+
+
             String fileContent = readTextFromFile(outPutFilePath);
-            if (fileContent!=null){
+            if (fileContent != null) {
                 textAreaAfterChanges.setText(fileContent);
             }
-        } catch (IOException e ) {
-            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie",
-                    "Operacja deszyfrowania nie powiodła się.",
-                    "Powód: " + "plik do deszyfrowania nie istnieje.").showAndWait();        }
+        } catch (IOException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja deszyfrowania nie powiodła się.", "Powód: " + "plik do deszyfrowania nie istnieje.").showAndWait();
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException | InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja deszyfrowania nie powiodła się.", "Powód: " + "Plik nie został zaszyfrowany").showAndWait();
+        } catch (IllegalBlockSizeException e) {
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja deszyfrowania nie powiodła się.", "Powód: " + "Zbyt duży rozmiar pliku").showAndWait();
+
+        }
     }
 
-    private String readTextFromFile(String path){
-        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+    private String readTextFromFile(String path) {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -143,10 +132,8 @@ public class MainController implements Initializable {
             }
             String everything = sb.toString();
             return everything;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja odczytu z pliku nie powiodła się.", "Powód: " + "Błąd odczytu z pliku").showAndWait();
         }
         return null;
     }
@@ -157,7 +144,7 @@ public class MainController implements Initializable {
         dc.setTitle("Choose the root directory");
         rootDirectory = dc.showDialog(null);
         if (rootDirectory.isDirectory()) {
-            keysPath=rootDirectory.toString();
+            keysPath = rootDirectory.toString();
             textFieldKeysPath.setText(keysPath);
         }
     }
@@ -166,9 +153,7 @@ public class MainController implements Initializable {
         try {
             encoderDecoder.createNewKeys(keysPath);
         } catch (IOException e) {
-            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie",
-                    "Operacja generacji kluczy nie powiodła się.",
-                    "Powód: " + "Błąd zapisu do pliku.").showAndWait();
+            customMessageBox.showMessageBox(Alert.AlertType.WARNING, "Ostrzeżenie", "Operacja generacji kluczy nie powiodła się.", "Powód: " + "Błąd zapisu do pliku.").showAndWait();
         }
     }
 }
