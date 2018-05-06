@@ -1,0 +1,9 @@
+/* AUTOMATICALLY GENERATED ON Sun May 06 02:04:40 CEST 2018*/
+/* DO NOT EDIT */
+
+keystore "file:/C:/Test/exampleraystore", "jks";
+
+grant signedBy "patryk" {
+  permission java.io.FilePermission "C:\\Users\\Patryk Zdral\\IdeaProjects\\*", "read";
+};
+

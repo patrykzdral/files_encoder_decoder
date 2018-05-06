@@ -6,9 +6,98 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pwr.encoder.fxfiles.controller.MainController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<VBox prefHeight="520.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pwr.encoder.fxfiles.controller.MainController">
+   <children>
+      <HBox prefHeight="60.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="330.0">
+               <children>
+                  <Button fx:id="buttonChooseFile" mnemonicParsing="false" onAction="#buttonChooseFile_onAction" prefHeight="31.0" prefWidth="194.0" text="Wybierz plik" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="60.0" prefWidth="331.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="ścieżka pliku:" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="textFieldFilePath" editable="false" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="76.0" prefWidth="605.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="76.0" prefWidth="331.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buttonChooseKeyPath" mnemonicParsing="false" onAction="#buttonChooseKeyPath_onAction" prefHeight="31.0" prefWidth="182.0" text="nowa ścieżke do kluczy" />
+                     </children>
+                  </HBox>
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buttonGenerateNewKeys" mnemonicParsing="false" onAction="#buttonGenerateNewKeys_onAction" prefHeight="31.0" prefWidth="182.0" text="wygeneruj nowe klucze" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="76.0" prefWidth="325.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="ścieżka do kluczy:" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="textFieldKeysPath" editable="false" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="274.0" prefWidth="600.0">
+         <children>
+            <Region prefHeight="268.0" prefWidth="30.0" />
+            <VBox prefHeight="274.0" prefWidth="305.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="305.0">
+                     <children>
+                        <Label text="Oryginalna zawartość pliku" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="textAreaOriginalFile" editable="false" prefHeight="248.0" prefWidth="305.0" />
+               </children>
+            </VBox>
+            <Region prefHeight="268.0" prefWidth="42.0" />
+            <VBox prefHeight="274.0" prefWidth="305.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="305.0">
+                     <children>
+                        <Label text="Zawartość po przetworzeniu" />
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="textAreaAfterChanges" editable="false" prefHeight="248.0" prefWidth="305.0" />
+               </children>
+            </VBox>
+            <Region prefHeight="268.0" prefWidth="30.0" />
+         </children>
+      </HBox>
+      <Region prefHeight="22.0" prefWidth="600.0" />
+      <HBox prefHeight="56.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="336.0">
+               <children>
+                  <Button fx:id="buttonEncrypt" mnemonicParsing="false" onAction="#buttonEncrypt_onAction" prefHeight="31.0" prefWidth="267.0" text="szyfruj zawartość" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="319.0">
+               <children>
+                  <Button fx:id="buttonDecrypt" mnemonicParsing="false" onAction="#buttonDecrypt_onAction" prefHeight="31.0" prefWidth="274.0" text="rozszyfruj zawartość" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Region prefHeight="13.0" prefWidth="600.0" />
+   </children>
 </VBox>

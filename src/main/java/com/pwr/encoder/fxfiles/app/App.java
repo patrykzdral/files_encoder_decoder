@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,11 +23,12 @@ public class App extends Application {
             Parent root = loader.getRoot();
 
             primaryStage.setTitle("Files Encoder");
-            //primaryStage.getIcons().add(new Image("/image/icon.png"));
+            primaryStage.getIcons().add(new Image("/image/encoder.png"));
             primaryStage.setMinWidth(610);
             primaryStage.setMinHeight(390);
-            primaryStage.setScene(new Scene(root, 620, 400));
+            primaryStage.setScene(new Scene(root, 679, 520));
             primaryStage.centerOnScreen();
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException ioEcx) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ioEcx);
